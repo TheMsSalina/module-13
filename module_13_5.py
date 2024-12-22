@@ -13,6 +13,10 @@ kb = ReplyKeyboardMarkup(resize_keyboard=True).add(
     KeyboardButton(text='Рассчитать'),
     KeyboardButton(text='Информация'))
 
+@dp.message_handler()
+async def all_massages(message):
+    await message.answer('Введите команду /start, чтобы начать общение.')
+
 @dp.message_handler(commands=['start'])
 async def start_message(message):
     await message.answer('Привет! Я бот помогающий твоему здоровью.', reply_markup = kb)
