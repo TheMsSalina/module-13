@@ -13,10 +13,6 @@ kb = ReplyKeyboardMarkup(resize_keyboard=True).add(
     KeyboardButton(text='Рассчитать'),
     KeyboardButton(text='Информация'))
 
-@dp.message_handler()
-async def all_massages(message):
-    await message.answer('Введите команду /start, чтобы начать общение.')
-
 @dp.message_handler(commands=['start'])
 async def start_message(message):
     await message.answer('Привет! Я бот помогающий твоему здоровью.', reply_markup = kb)
@@ -53,6 +49,10 @@ async def send_calories(message, state):
     norma = (10 * int(data["weight"])) + (6.25 * int(data["growth"])) - (5 * int(data["age"])) + 5
     await message.answer(f"Ваша норма калорий: {norma}")
     await state.finish()
+
+@dp.message_handler()
+async def all_massages(message):
+    await message.answer('Введите команду /start, чтобы начать общение.')
 
 if __name__ == "__main__":
     executor.start_polling(dp, skip_updates=True)
